@@ -1,0 +1,5 @@
+_data/
+src/storage/
+!/src/public/vendor
+.git/
+.idea/

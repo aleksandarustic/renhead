@@ -1,0 +1,53 @@
+version: "3.7"
+services:
+  renhead_dev:
+    build:
+      args:
+        user: renhead
+        uid: 1000
+      context: ./
+      dockerfile: ./docker/Dockerfile
+    image: renhead
+    env_file:
+      - ./docker/backend.env
+    container_name: renhead
+    restart: unless-stopped
+    working_dir: /var/www/
+    volumes:
+      - ./src:/var/www
+    networks:
+      - renhead
+
+  db:
+    image: mysql:8.0
+    container_name: db
+    restart: unless-stopped
+    ports:
+      - 3307:3306
+    environment:
+      MYSQL_DATABASE: renhead
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_PASSWORD: password
+      MYSQL_USER: renhead_user
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    volumes:
+      - ./_data/database/:/var/lib/mysql/
+    networks:
+      - renhead
+
+  nginx:
+    image: nginx:alpine
+    container_name: nginx
+    restart: unless-stopped
+    ports:
+      - 1119:80
+    volumes:
+      - ./src:/var/www
+      - ./docker/nginx:/etc/nginx/conf.d/
+    networks:
+      - renhead
+
+networks:
+  renhead:
+    driver: bridge
