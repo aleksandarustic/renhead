@@ -1,0 +1,743 @@
+{
+	"info": {
+		"_postman_id": "41a8c0f2-29c7-47ae-bbac-907ddaabb341",
+		"name": "Renhead",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login as non_approver",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "non_approver_1@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8890/api/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8890",
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						},
+						"description": "It will return token used for sanctum auth"
+					},
+					"response": []
+				},
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "first_name",
+									"value": "aleksandar",
+									"type": "text"
+								},
+								{
+									"key": "last_name",
+									"value": "ustic",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "merritt75@example.org",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "text"
+								},
+								{
+									"key": "confirmation_password",
+									"value": "password",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8890/api/auth/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8890",
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						},
+						"description": "You can add non approver user by calling register endpoint"
+					},
+					"response": []
+				},
+				{
+					"name": "Login as approver",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "approver_1@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8890/api/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8890",
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						},
+						"description": "Login as non_approver\nIt will return token used for sanctum auth"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Payments",
+			"item": [
+				{
+					"name": "List",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8890/api/payments",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8890",
+							"path": [
+								"api",
+								"payments"
+							]
+						},
+						"description": "Approver can list all payments in system, but he can't create, update, delete payment\nNon-approver can fetch and make actions on his own payments. Paganization is enabled for list route\n"
+					},
+					"response": []
+				},
+				{
+					"name": "Get single",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8890/api/payments/52",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8890",
+							"path": [
+								"api",
+								"payments",
+								"52"
+							]
+						},
+						"description": "Approver can list all payments in system, but he can't create, update, delete payment\nNon-approver can fetch and make actions on his own payments "
+					},
+					"response": []
+				},
+				{
+					"name": "Store",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "total_amount",
+									"value": "22.2",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8890/api/payments",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8890",
+							"path": [
+								"api",
+								"payments"
+							]
+						},
+						"description": "Approver can list all payments in system, but he can't create, update, delete payment\nNon-approver can fetch and make actions on his own payments "
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "total_amount",
+									"value": "22.5",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8890/api/payments/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8890",
+							"path": [
+								"api",
+								"payments",
+								"1"
+							]
+						},
+						"description": "Approver can list all payments in system, but he can't create, update, delete payment\nNon-approver can fetch and make actions on his own payments "
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8890/api/payments/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8890",
+							"path": [
+								"api",
+								"payments",
+								"3"
+							]
+						},
+						"description": "Approver can list all payments in system, but he can't create, update, delete payment\nNon-approver can fetch and make actions on his own payments "
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "7|61gmdaglcJjTLfS9HQ3VGjUh3SQMADWrPkUFvKjF",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Travel Payments",
+			"item": [
+				{
+					"name": "List",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8890/api/travel-payments",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8890",
+							"path": [
+								"api",
+								"travel-payments"
+							]
+						},
+						"description": "Approver can list all travel_payments in system, but he can't create, update, delete travel payment.\nNon-approver can fetch and make actions on his own payments .\nPaganization is enabled for list route"
+					},
+					"response": []
+				},
+				{
+					"name": "Get single",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8890/api/travel-payments/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8890",
+							"path": [
+								"api",
+								"travel-payments",
+								"2"
+							]
+						},
+						"description": "Approver can list all travel_payments in system, but he can't create, update, delete travel payment.\nNon-approver can fetch and make actions on his own payments "
+					},
+					"response": []
+				},
+				{
+					"name": "Store",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "amount",
+									"value": "22.2",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8890/api/travel-payments",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8890",
+							"path": [
+								"api",
+								"travel-payments"
+							]
+						},
+						"description": "Approver can list all travel_payments in system, but he can't create, update, delete travel payment.\nNon-approver can fetch and make actions on his own payments "
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "amount",
+									"value": "22.5",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8890/api/travel-payments/30",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8890",
+							"path": [
+								"api",
+								"travel-payments",
+								"30"
+							]
+						},
+						"description": "Approver can list all travel_payments in system, but he can't create, update, delete travel payment.\nNon-approver can fetch and make actions on his own payments "
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8890/api/travel-payments/13",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8890",
+							"path": [
+								"api",
+								"travel-payments",
+								"13"
+							]
+						},
+						"description": "Approver can list all travel_payments in system, but he can't create, update, delete travel payment.\nNon-approver can fetch and make actions on his own payments "
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "7|61gmdaglcJjTLfS9HQ3VGjUh3SQMADWrPkUFvKjF",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Payment Approval",
+			"item": [
+				{
+					"name": "Payment Approve",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "status",
+									"value": "APPROVED",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8890/api/payments/23/approve",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8890",
+							"path": [
+								"api",
+								"payments",
+								"23",
+								"approve"
+							]
+						},
+						"description": "Only approver have access to approve or disapprove payments"
+					},
+					"response": []
+				},
+				{
+					"name": "Travel Payment Approve",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "status",
+									"value": "APPROVED",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8890/api/travel-payments/1/approve",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8890",
+							"path": [
+								"api",
+								"travel-payments",
+								"1",
+								"approve"
+							]
+						},
+						"description": "Only approver have access to approve or disapprove payments"
+					},
+					"response": []
+				},
+				{
+					"name": "Payment Disapprove",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "status",
+									"value": "DISAPPROVED",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8890/api/payments/36/approve",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8890",
+							"path": [
+								"api",
+								"payments",
+								"36",
+								"approve"
+							]
+						},
+						"description": "Only approver have access to approve or disapprove payments"
+					},
+					"response": []
+				},
+				{
+					"name": "Travel Payment Disapprove",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "status",
+									"value": "DISAPPROVED",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8890/api/travel-payments/1/approve",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8890",
+							"path": [
+								"api",
+								"travel-payments",
+								"1",
+								"approve"
+							]
+						},
+						"description": "Only approver have access to approve or disapprove payments"
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "10|2277zpMBv5T1KOf2qnLSkLU6UmZ7KnKV2vS3lxBM",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Report",
+			"item": [
+				{
+					"name": "Report",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "10|2277zpMBv5T1KOf2qnLSkLU6UmZ7KnKV2vS3lxBM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8890/api/report",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8890",
+							"path": [
+								"api",
+								"report"
+							]
+						},
+						"description": "Returns report"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

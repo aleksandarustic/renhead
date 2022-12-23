@@ -1,13 +1,12 @@
 version: "3.7"
 services:
-  renhead_dev:
+  renhead:
     build:
       args:
         user: renhead
         uid: 1000
       context: ./
       dockerfile: ./docker/Dockerfile
-    image: renhead
     env_file:
       - ./docker/backend.env
     container_name: renhead
@@ -41,11 +40,13 @@ services:
     container_name: nginx
     restart: unless-stopped
     ports:
-      - 1119:80
+      - 8890:80
     volumes:
       - ./src:/var/www
       - ./docker/nginx:/etc/nginx/conf.d/
     networks:
+      - renhead
+    depends_on:
       - renhead
 
 networks:

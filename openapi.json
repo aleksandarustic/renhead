@@ -1,0 +1,667 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Renhead",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8890"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Auth"
+    },
+    {
+      "name": "Payments"
+    },
+    {
+      "name": "Travel Payments"
+    },
+    {
+      "name": "Payment Approval"
+    },
+    {
+      "name": "Report"
+    }
+  ],
+  "paths": {
+    "/api/auth/login": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Login as approver",
+        "description": "Login as non_approver\nIt will return token used for sanctum auth",
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "example": "approver_1@gmail.com"
+                  },
+                  "password": {
+                    "type": "string",
+                    "example": "password"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/auth/register": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Register",
+        "description": "You can add non approver user by calling register endpoint",
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "first_name": {
+                    "type": "string",
+                    "example": "aleksandar"
+                  },
+                  "last_name": {
+                    "type": "string",
+                    "example": "ustic"
+                  },
+                  "email": {
+                    "type": "string",
+                    "example": "merritt75@example.org"
+                  },
+                  "password": {
+                    "type": "string",
+                    "example": "password"
+                  },
+                  "confirmation_password": {
+                    "type": "string",
+                    "example": "password"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/payments": {
+      "get": {
+        "tags": [
+          "Payments"
+        ],
+        "summary": "List",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "description": "Approver can list all payments in system, but he can't create, update, delete payment\nNon-approver can fetch and make actions on his own payments. Paganization is enabled for list route\n",
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Payments"
+        ],
+        "summary": "Store",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "description": "Approver can list all payments in system, but he can't create, update, delete payment\nNon-approver can fetch and make actions on his own payments ",
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "total_amount": {
+                    "type": "number",
+                    "example": "22.2"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/payments/{payment_id}": {
+      "delete": {
+        "tags": [
+          "Payments"
+        ],
+        "summary": "Delete",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "payment_id",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true
+          }
+        ],
+        "description": "Approver can list all payments in system, but he can't create, update, delete payment\nNon-approver can fetch and make actions on his own payments ",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Payments"
+        ],
+        "summary": "Get single",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "payment_id",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true
+          }
+        ],
+        "description": "Approver can list all payments in system, but he can't create, update, delete payment\nNon-approver can fetch and make actions on his own payments ",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Payments"
+        ],
+        "summary": "Update",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "description": "Approver can list all payments in system, but he can't create, update, delete payment\nNon-approver can fetch and make actions on his own payments ",
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "total_amount": {
+                    "type": "number",
+                    "example": "22.5"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "payment_id",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/travel-payments": {
+      "get": {
+        "tags": [
+          "Travel Payments"
+        ],
+        "summary": "List",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "description": "Approver can list all travel_payments in system, but he can't create, update, delete travel payment.\nNon-approver can fetch and make actions on his own payments .\nPaganization is enabled for list route",
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Travel Payments"
+        ],
+        "summary": "Store",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "description": "Approver can list all travel_payments in system, but he can't create, update, delete travel payment.\nNon-approver can fetch and make actions on his own payments ",
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "amount": {
+                    "type": "number",
+                    "example": "22.2"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/travel-payments/{payment_id}": {
+      "get": {
+        "tags": [
+          "Travel Payments"
+        ],
+        "summary": "Get single",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "description": "Approver can list all travel_payments in system, but he can't create, update, delete travel payment.\nNon-approver can fetch and make actions on his own payments ",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "payment_id",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Travel Payments"
+        ],
+        "summary": "Update",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "description": "Approver can list all travel_payments in system, but he can't create, update, delete travel payment.\nNon-approver can fetch and make actions on his own payments ",
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "amount": {
+                    "type": "number",
+                    "example": "22.5"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "payment_id",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Travel Payments"
+        ],
+        "summary": "Delete",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "description": "Approver can list all travel_payments in system, but he can't create, update, delete travel payment.\nNon-approver can fetch and make actions on his own payments ",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "payment_id",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/payments/{payment_id}/approve": {
+      "post": {
+        "tags": [
+          "Payment Approval"
+        ],
+        "summary": "Payment Approve",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "description": "Only approver have access to approve or disapprove payments",
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "status": {
+                    "type": "string",
+                    "example": "APPROVED"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "payment_id",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/travel-payments/{payment_id}/approve": {
+      "post": {
+        "tags": [
+          "Payment Approval"
+        ],
+        "summary": "Travel Payment Disapprove",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "description": "Only approver have access to approve or disapprove payments",
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "status": {
+                    "type": "string",
+                    "example": "DISAPPROVED"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "payment_id",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/report": {
+      "get": {
+        "tags": [
+          "Report"
+        ],
+        "summary": "Report",
+        "description": "Returns report",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    }
+  }
+}
