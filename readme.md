@@ -26,7 +26,8 @@ email: ```approver_1@gmail.com``` password: ```password```
 
 ## About Application
 
-It is worth mentioning that Payment and Travel Crud api have following rules
+Pagination is added to Payment and Travel Crud
+It is worth mentioning that Payment and Travel Crud have following rules
 
 - Non-approver can only fetch and make actions on his own payments and travel-payments
 
