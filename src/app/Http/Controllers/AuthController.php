@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
-use App\Models\User;
+use App\Services\AuthServiceInterface;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Auth;
 
 /**
  * Class AuthController
@@ -15,34 +15,32 @@ use Illuminate\Support\Facades\Auth;
 class AuthController extends Controller
 {
     /**
+     * @param AuthServiceInterface $authService
      * @param RegisterRequest $request
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
-    public function register(RegisterRequest $request)
+    public function register(AuthServiceInterface $authService, RegisterRequest $request)
     {
-        $user = User::create(Arr::except($request->validated(), 'confirmation_password'));
+        $token = $authService->register(Arr::except($request->validated(), 'confirmation_password'));
 
         return response()->json([
-            'user' => $user,
-            'token' => $user->createToken('auth-token', [$user->type])->plainTextToken
+            'message' => "User successfully registered",
+            'token' => $token
         ]);
     }
 
     /**
+     * @param AuthServiceInterface $authService
      * @param LoginRequest $request
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
-    public function login(LoginRequest $request)
+    public function login(AuthServiceInterface $authService, LoginRequest $request)
     {
-        if (!Auth::guard('web')->attempt($request->validated())) {
-            abort(401, "Email & Password does not match with our record.");
-        }
-
-        $user = User::where('email', $request->get('email'))->first();
+        $token = $authService->login($request->validated());
 
         return response()->json([
-            'token' => $user->createToken('auth-token', [$user->type])->plainTextToken,
-            'message' => "User Logged In Successfully"
+            'token' => $token,
+            'message' => "User logged in successfully"
         ]);
     }
 }

@@ -107,7 +107,7 @@ class TravelPaymentController extends Controller
      * @param PaymentApprovalRequest $request
      * @return PaymentApprovalResource
      */
-    public function approve(
+    public function approveOrDisapprove(
         PaymentApprovalRepository $paymentApprovalRepository,
         TravelPayment $travelPayment,
         PaymentApprovalRequest $request

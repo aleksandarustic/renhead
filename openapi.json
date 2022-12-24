@@ -531,7 +531,7 @@
         }
       }
     },
-    "/api/payments/{payment_id}/approve": {
+    "/api/payments/{payment_id}/approval": {
       "post": {
         "tags": [
           "Payment Approval"
@@ -586,7 +586,7 @@
         }
       }
     },
-    "/api/travel-payments/{payment_id}/approve": {
+    "/api/travel-payments/{payment_id}/approval": {
       "post": {
         "tags": [
           "Payment Approval"

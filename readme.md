@@ -41,13 +41,13 @@ Payment, TravelPayments, PaymentApprovals , Users are seeded.
 | POST  | /api/auth/login  | Login  |
 | POST  | /api/auth/register  | Register  |
 | GET  | /api/report  | Report  |
-| POST  | /api/payments/{payment_id}/approve  | Approve/disapprove payment  |
+| POST  | /api/payments/{payment_id}/approval  | Approve/disapprove payment  |
 | GET  | /api/payments  | List payments  |
 | POST  | /api/payments  | Create payment  |
 | GET  | /api/payments/{payment_id}  | Single payment  |
 | PUT  | /api/payments/{payment_id}  | Update payment  |
 | DELETE  | /api/payments/{payment_id}  | Delete payment  |
-| POST  | /api/travel-payments/{payment_id}/approve  | Approve/disapprove travel payment  |
+| POST  | /api/travel-payments/{payment_id}/approval| Approve/disapprove travel payment  |
 | GET  | /api/travel-payments  | List travel payments  |
 | POST  | /api/travel-payments  | Create travel payment  |
 | GET  | /api/travel-payments/{payment_id}  | Single travel payment  |

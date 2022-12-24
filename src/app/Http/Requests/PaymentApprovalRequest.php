@@ -18,7 +18,7 @@ class PaymentApprovalRequest extends FormRequest
      */
     public function authorize()
     {
-        return $this->user()->can('approve', PaymentApproval::class);
+        return $this->user()->can('approveOrDisapprove', PaymentApproval::class);
     }
 
     /**

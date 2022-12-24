@@ -24,10 +24,10 @@ Route::prefix('auth')->group(function () {
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('payments', PaymentController::class);
-    Route::post('payments/{payment}/approve', [PaymentController::class, 'approve']);
+    Route::post('payments/{payment}/approval', [PaymentController::class, 'approveOrDisapprove']);
 
     Route::apiResource('travel-payments', TravelPaymentController::class);
-    Route::post('travel-payments/{travel_payment}/approve', [TravelPaymentController::class, 'approve']);
+    Route::post('travel-payments/{travel_payment}/approval', [TravelPaymentController::class, 'approveOrDisapprove']);
 
     Route::get('report', [ReportController::class, 'report']);
 });

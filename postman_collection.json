@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "41a8c0f2-29c7-47ae-bbac-907ddaabb341",
+		"_postman_id": "a7827d25-652f-4715-92f8-3301ce538b27",
 		"name": "Renhead",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -540,7 +540,7 @@
 							]
 						},
 						"url": {
-							"raw": "http://localhost:8890/api/payments/23/approve",
+							"raw": "http://localhost:8890/api/payments/23/approval",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -550,7 +550,7 @@
 								"api",
 								"payments",
 								"23",
-								"approve"
+								"approval"
 							]
 						},
 						"description": "Only approver have access to approve or disapprove payments"
@@ -578,7 +578,7 @@
 							]
 						},
 						"url": {
-							"raw": "http://localhost:8890/api/travel-payments/1/approve",
+							"raw": "http://localhost:8890/api/travel-payments/1/approval",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -588,7 +588,7 @@
 								"api",
 								"travel-payments",
 								"1",
-								"approve"
+								"approval"
 							]
 						},
 						"description": "Only approver have access to approve or disapprove payments"
@@ -616,7 +616,7 @@
 							]
 						},
 						"url": {
-							"raw": "http://localhost:8890/api/payments/36/approve",
+							"raw": "http://localhost:8890/api/payments/36/approval",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -626,7 +626,7 @@
 								"api",
 								"payments",
 								"36",
-								"approve"
+								"approval"
 							]
 						},
 						"description": "Only approver have access to approve or disapprove payments"
@@ -654,7 +654,7 @@
 							]
 						},
 						"url": {
-							"raw": "http://localhost:8890/api/travel-payments/1/approve",
+							"raw": "http://localhost:8890/api/travel-payments/1/approval",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -664,7 +664,7 @@
 								"api",
 								"travel-payments",
 								"1",
-								"approve"
+								"approval"
 							]
 						},
 						"description": "Only approver have access to approve or disapprove payments"
@@ -677,7 +677,7 @@
 				"bearer": [
 					{
 						"key": "token",
-						"value": "10|2277zpMBv5T1KOf2qnLSkLU6UmZ7KnKV2vS3lxBM",
+						"value": "1|j0XYe8hd3g1CW1XqEnd9lNwNI2P9tmA9vwDoVNLx",
 						"type": "string"
 					}
 				]

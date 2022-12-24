@@ -18,7 +18,7 @@ class PaymentApprovalPolicy
      * @param User $user
      * @return bool
      */
-    public function approve(User $user): bool
+    public function approveOrDisapprove(User $user): bool
     {
         return $user->tokenCan('APPROVER');
     }
